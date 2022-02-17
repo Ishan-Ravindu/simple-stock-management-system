@@ -133,7 +133,7 @@ public class LoginFrame extends javax.swing.JFrame {
             Login login = new Login(email, pwd);
             if (login.signIn()) {
                 dispose();
-                new StockFrame();
+                new StockFrame().setVisible(true);
 
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid Username or Password");
