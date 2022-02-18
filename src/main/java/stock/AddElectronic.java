@@ -111,7 +111,7 @@ public class AddElectronic extends javax.swing.JFrame {
                 String name = txtName.getText();
                 String description = lblDescription.getText();
                 String powerType = txtPowerType.getText();
-                if(name.isBlank()&&powerType.isBlank()&&description.isBlank()){
+                if(name.isBlank()||powerType.isBlank()||description.isBlank()){
                     JOptionPane.showMessageDialog(this, "fill all the fields");
                 }else{
                     int quantity = Integer.parseInt(txtQuantity.getText());

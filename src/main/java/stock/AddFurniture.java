@@ -138,7 +138,7 @@ public class AddFurniture extends javax.swing.JFrame {
                 String name = txtName.getText();
                 String description = txtDescription.getText();
                 String material = txtMaterial.getText();
-                if(name.isBlank()&&description.isBlank()&&material.isBlank()){
+                if(name.isBlank()||description.isBlank()||material.isBlank()){
                     JOptionPane.showMessageDialog(this, "fill all the fields");
                 }else{
                     int quantity = Integer.parseInt(txtQuantity.getText());
