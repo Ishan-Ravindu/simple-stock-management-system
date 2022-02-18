@@ -4,6 +4,9 @@
  */
 package stock;
 
+
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ishan
@@ -104,10 +107,23 @@ public class AddElectronic extends javax.swing.JFrame {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         if (evt.getSource() == btnSubmit) {
-            dispose();
-            Electronic electronic = new Electronic(50, "table fan", "fan description", "AC");
-            ItemList.addElectronics(electronic);
-            new StockFrame().setVisible(true);
+            try {
+                String name = txtName.getText();
+                String description = lblDescription.getText();
+                String powerType = txtPowerType.getText();
+                if(name.isBlank()&&powerType.isBlank()&&description.isBlank()){
+                    JOptionPane.showMessageDialog(this, "fill all the fields");
+                }else{
+                    int quantity = Integer.parseInt(txtQuantity.getText());
+                    Furniture furniture = new Furniture(quantity, name, description, powerType);
+                    ItemList.addFurnitures(furniture);
+                    dispose();
+                    new StockFrame().setVisible(true);
+                }
+                
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
