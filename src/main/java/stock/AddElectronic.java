@@ -112,7 +112,7 @@ public class AddElectronic extends javax.swing.JFrame {
                 String description = lblDescription.getText();
                 String powerType = txtPowerType.getText();
                 if(name.isBlank()||powerType.isBlank()||description.isBlank()){
-                    JOptionPane.showMessageDialog(this, "fill all the fields");
+                    JOptionPane.showMessageDialog(this, "All the fields are required");
                 }else{
                     int quantity = Integer.parseInt(txtQuantity.getText());
                     Furniture furniture = new Furniture(quantity, name, description, powerType);
@@ -122,7 +122,7 @@ public class AddElectronic extends javax.swing.JFrame {
                 }
                 
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, e.getMessage());
+                JOptionPane.showMessageDialog(this, "type integer in Quantity filed");
             }
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
