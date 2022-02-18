@@ -119,6 +119,8 @@ public class AddFurniture extends javax.swing.JFrame {
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
        if (evt.getSource() == btnSubmit) {
             dispose();
+            Furniture furniture = new Furniture(10, "teacher chair", "description", "wood");
+           ItemList.addFurnitures(furniture);            
             new StockFrame().setVisible(true);
         }
     }//GEN-LAST:event_btnSubmitActionPerformed

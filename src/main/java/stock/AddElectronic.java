@@ -105,6 +105,8 @@ public class AddElectronic extends javax.swing.JFrame {
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         if (evt.getSource() == btnSubmit) {
             dispose();
+            Electronic electronic = new Electronic(50, "table fan", "fan description", "AC");
+            ItemList.addElectronics(electronic);
             new StockFrame().setVisible(true);
         }
     }//GEN-LAST:event_btnSubmitActionPerformed

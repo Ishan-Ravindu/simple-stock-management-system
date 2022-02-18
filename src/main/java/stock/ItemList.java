@@ -4,30 +4,43 @@ import java.util.ArrayList;
 
 
 public class ItemList {
-    private ArrayList<Electronic> electronics = new ArrayList<Electronic>();
-    private ArrayList<Furniture> furnitures= new ArrayList<Furniture>();
+    private static ArrayList<Electronic> electronics = new ArrayList<Electronic>();
+    private static ArrayList<Furniture> furnitures= new ArrayList<Furniture>();
 
-    public ArrayList<Electronic> getElectronics() {
+    //load sample data
+    static{
+        Furniture chair = new Furniture(10, "teacher chair", "description", "wood");
+        Furniture table = new Furniture(20, "teacher table", "description", "wood");
+        furnitures.add(chair);
+        furnitures.add(table);
+
+        Electronic fan = new Electronic(50, "table fan", "fan description", "AC");
+        Electronic tv = new Electronic(5, "smart tv", "tv description", "AC");
+        electronics.add(fan);
+        electronics.add(tv);
+    }
+    
+    public static ArrayList<Electronic> getElectronics() {
         return electronics;
     }
 
-    public void addElectronics(Electronic electronics) {
-        this.electronics.add(electronics);
+    public static void addElectronics(Electronic newElectronics) {
+        electronics.add(newElectronics);
     }
 
-    public void removeElectronicByIndex(int index) {
-        this.electronics.remove(index);
+    public  static void removeElectronicByIndex(int index) {
+        electronics.remove(index);
     }
     
-    public ArrayList<Furniture> getFurnitures() {
+    public static ArrayList<Furniture> getFurnitures() {
         return furnitures;
     }
 
-    public void addFurnitures(Furniture furnitures) {
-        this.furnitures.add(furnitures);
+    public static void addFurnitures(Furniture newFurnitures) {
+        furnitures.add(newFurnitures);
     }
-    public void removeFurnitureByIndex(int index) {
-        this.furnitures.remove(index);
+    public static void removeFurnitureByIndex(int index) {
+        furnitures.remove(index);
     }
 
     
