@@ -106,6 +106,9 @@ public class StockFrame extends javax.swing.JFrame {
             dispose();
             new AddElectronic().setVisible(true);
         }
+        
+        
+        
     }//GEN-LAST:event_btnAddElectronicActionPerformed
 
    
