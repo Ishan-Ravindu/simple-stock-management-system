@@ -115,8 +115,8 @@ public class AddElectronic extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "All the fields are required");
                 }else{
                     int quantity = Integer.parseInt(txtQuantity.getText());
-                    Furniture furniture = new Furniture(quantity, name, description, powerType);
-                    ItemList.addFurnitures(furniture);
+                    Electronic electronic = new Electronic(quantity, name, description, powerType);
+                    ItemList.addElectronics(electronic);
                     dispose();
                     new StockFrame().setVisible(true);
                 }
