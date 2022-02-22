@@ -249,7 +249,7 @@ public class FurnitureTable {
 						model.removeRow(selectedRow);
 						ItemList.getFurnitures().remove(selectedRow);
 						txtName.setText("");
-						txtName.setText("");
+						txtDescription.setText("");
 						txtCount.setText("");
 						txtMaterial.setText("");
 

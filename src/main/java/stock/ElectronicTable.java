@@ -247,7 +247,7 @@ public class ElectronicTable {
 						model.removeRow(selectedRow);
 						ItemList.getElectronics().remove(selectedRow);
 						txtName.setText("");
-						txtName.setText("");
+						txtDescription.setText("");
 						txtCount.setText("");
 						txtPowerType.setText("");
 					}
