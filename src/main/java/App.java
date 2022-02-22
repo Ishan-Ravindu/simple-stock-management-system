@@ -11,10 +11,8 @@ IM/2019/010-Hiruni Keenavinna
 IM/2019/086-Gauri Wathsala
 */
 
-public class App 
-{
-    public static void main( String[] args )
-    {
-         new LoginFrame().setVisible(true);
+public class App {
+    public static void main(String[] args) {
+        new LoginFrame().setVisible(true);
     }
 }

@@ -1,10 +1,8 @@
 package stock;
 
-public class Item extends Quantity{
+public class Item extends Quantity {
     private String name;
     private String description;
-
-
 
     public Item(int count, String name, String description) {
         super(count);
@@ -28,6 +26,4 @@ public class Item extends Quantity{
         this.description = description;
     }
 
-    
-    
 }

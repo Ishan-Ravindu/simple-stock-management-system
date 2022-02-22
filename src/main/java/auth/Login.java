@@ -8,14 +8,15 @@ public class Login {
         this.email = email;
         this.password = password;
     }
+
     public boolean signIn() {
         UserList userList = new UserList();
         for (User i : userList.getUsers()) {
-            if(this.email.equalsIgnoreCase(i.getEmail()) &&this.password.equalsIgnoreCase(i.getPassword())){
+            if (this.email.equalsIgnoreCase(i.getEmail()) && this.password.equalsIgnoreCase(i.getPassword())) {
                 return true;
             }
-           }
+        }
         return false;
     }
-    
+
 }

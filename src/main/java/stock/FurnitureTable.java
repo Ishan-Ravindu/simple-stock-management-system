@@ -85,7 +85,7 @@ public class FurnitureTable {
 
 		panel = new JPanel();
 
-		String col[] = {"Name", "Description", "Count", "Material" };
+		String col[] = { "Name", "Description", "Count", "Material" };
 
 		model = new DefaultTableModel(col, 0);
 		for (String[] row : ItemList.getFurnitureDataForTable()) {
@@ -234,8 +234,6 @@ public class FurnitureTable {
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				
-
 				if (txtName.getText().equals("") &&
 						txtDescription.getText().equals("") &&
 						txtCount.getText().equals("") &&
@@ -247,20 +245,19 @@ public class FurnitureTable {
 					int selectedRow = jTable1.getSelectedRow();
 
 					int answer = JOptionPane.showConfirmDialog(frame, "Are you sure you want to delete this instance?",
-						"An Inane Question", JOptionPane.YES_NO_OPTION);
+							"An Inane Question", JOptionPane.YES_NO_OPTION);
 
-				if (selectedRow >= 0 && answer == 0) {
-					model.removeRow(selectedRow);
-					ItemList.getFurnitures().remove(selectedRow);
-					txtName.setText("");
-					txtName.setText("");
-					txtCount.setText("");
-					txtMaterial.setText("");
+					if (selectedRow >= 0 && answer == 0) {
+						model.removeRow(selectedRow);
+						ItemList.getFurnitures().remove(selectedRow);
+						txtName.setText("");
+						txtName.setText("");
+						txtCount.setText("");
+						txtMaterial.setText("");
 
+					}
 				}
-				}
 
-				
 			}
 		});
 
