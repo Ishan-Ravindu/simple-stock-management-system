@@ -15,6 +15,7 @@ public class FurnitureTable {
 	private JTableHeader header;
 
 	private JButton btnAdd;
+        private JButton btnBack;
 	// private JButton btnDelete;
 	private JButton btnUpdate;
 
@@ -77,6 +78,12 @@ public class FurnitureTable {
 		btnUpdate = new JButton("Update");
 		btnUpdate.setBounds(327, 115, 130, 31);
 		frame.getContentPane().add(btnUpdate);
+                
+                btnBack = new JButton("Back");
+//		btnBack.setBackground(Color.GRAY);
+                btnBack.setFont(new Font("Arial", Font.BOLD, 20)); // size 
+		btnBack.setBounds(450,1, 40, 20);
+		frame.getContentPane().add(btnBack);
 
 		panel = new JPanel();
 
@@ -241,6 +248,15 @@ public class FurnitureTable {
 		// 		}
 		// 	}
 		// });
+                
+                 btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+                        frame.dispose();
+                        new StockFrame().setVisible(true);
+                        
+                        }
+        
+        });
 	}
 
 

@@ -121,10 +121,12 @@ public class StockFrame extends javax.swing.JFrame {
 
     private void btnElectronicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElectronicActionPerformed
         new ElectronicTable();
+        dispose();
     }//GEN-LAST:event_btnElectronicActionPerformed
 
     private void btnFurnitureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFurnitureActionPerformed
         new FurnitureTable();
+        dispose();
     }//GEN-LAST:event_btnFurnitureActionPerformed
 
    
