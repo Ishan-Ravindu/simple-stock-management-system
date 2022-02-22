@@ -12,8 +12,6 @@ public class ElectronicTable {
 	private JFrame frame;
 	private JScrollPane pane;
 	private JTable jTable1;
-	private JTableHeader header;
-
 	private JButton btnAdd;
 	private JButton btnBack;
 	private JButton btnDelete;
@@ -95,7 +93,7 @@ public class ElectronicTable {
 
 		jTable1.setModel(model);
 
-		header = jTable1.getTableHeader();
+		jTable1.getTableHeader();
 		panel.setLayout(null);
 
 		pane = new JScrollPane(jTable1);
