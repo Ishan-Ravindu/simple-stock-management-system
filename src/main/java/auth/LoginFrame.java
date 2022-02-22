@@ -46,7 +46,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
         lblEmail.setText("Email");
 
-        txtEmail.setText("ishan@gmail.com");
+        txtEmail.setText("group11@gmail.com");
 
         lblPassword.setText("password");
 
@@ -64,7 +64,7 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
-        txtPassword.setText("123@ishan");
+        txtPassword.setText("123@group11");
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Welcome");
