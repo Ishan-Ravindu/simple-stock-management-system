@@ -2,7 +2,6 @@ package stock;
 
 import java.util.ArrayList;
 
-
 public class ItemList {
 
     private static ArrayList<Electronic> electronics = new ArrayList<Electronic>();
@@ -66,59 +65,60 @@ public class ItemList {
     }
 
     // formate data for the stock table
-    public static javax.swing.table.DefaultTableModel getFurnitureDataForTable() {
+    public static String[][] getFurnitureDataForTable() {
 
-        
-        String[][] data = new String[ItemList.getFurnitures().size()][4];
-        
+        String[][] data = new String[ItemList.getFurnitures().size()][5];
+
         for (int i = 0; i < ItemList.getFurnitures().size(); i++) {
-            for (int j = 0; j < 4; j++) {
-                if(j==0){
+            for (int j = 0; j < 5; j++) {
+                if (j == 0) {
+                    String strIndex = Integer.toString(i + 1);
+                    data[i][j] = strIndex;
+                }
+                if (j == 1) {
                     data[i][j] = ItemList.getFurnitures().get(i).getName();
                 }
-                if(j==1){
+                if (j == 2) {
                     data[i][j] = ItemList.getFurnitures().get(i).getDescription();
                 }
-                if(j==2){
+                if (j == 3) {
                     String strCount = Integer.toString(ItemList.getFurnitures().get(i).getCount());
                     data[i][j] = strCount;
                 }
-                if(j==3){
+                if (j == 4) {
                     data[i][j] = ItemList.getFurnitures().get(i).getMaterial();
                 }
-            }}
+            }
+        }
 
-        return new javax.swing.table.DefaultTableModel(
-                data,
-                new String[] {
-                        "Name", "Description", "Quantity", "Material"
-                });
+        return data;
     }
 
-    public static javax.swing.table.DefaultTableModel getElectronicDataForTable() {
-        String[][] data = new String[ItemList.getElectronics().size()][4];
-        
+    public static String[][] getElectronicDataForTable() {
+        String[][] data = new String[ItemList.getElectronics().size()][5];
+
         for (int i = 0; i < ItemList.getElectronics().size(); i++) {
-            for (int j = 0; j < 4; j++) {
-                if(j==0){
+            for (int j = 0; j < 5; j++) {
+                if (j == 0) {
+                    String strIndex = Integer.toString(i + 1);
+                    data[i][j] = strIndex;
+                }
+                if (j == 1) {
                     data[i][j] = ItemList.getElectronics().get(i).getName();
                 }
-                if(j==1){
+                if (j == 2) {
                     data[i][j] = ItemList.getElectronics().get(i).getDescription();
                 }
-                if(j==2){
-                    String strCount = Integer.toString(ItemList.getElectronics().get(i).getCount());
+                if (j == 3) {
+                    String strCount = Integer.toString(ItemList.getFurnitures().get(i).getCount());
                     data[i][j] = strCount;
                 }
-                if(j==3){
+                if (j == 4) {
                     data[i][j] = ItemList.getElectronics().get(i).getPowerType();
                 }
-            }}
+            }
+        }
 
-        return new javax.swing.table.DefaultTableModel(
-                data,
-                new String[] {
-                        "Name", "Description", "Quantity", "Power Type"
-                });
+        return data;
     }
 }
