@@ -184,10 +184,7 @@ public class ElectronicTable {
 		// add table data
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
-				int lengthOfItemList = ItemList.getElectronics().size();
-				String strIndex = Integer.toString(lengthOfItemList + 1);
-
+		
 				if (!txtCount.getText().matches("([0-9]*){1,20}")) {
 					JOptionPane.showMessageDialog(frame, "count value must be numeric!");
 				} else {
@@ -205,7 +202,7 @@ public class ElectronicTable {
 							ItemList.getElectronics().add(electronic);
 
 							// update Table
-							model.addRow(new String[] { strIndex, txtName.getText(), txtDescription.getText(),
+							model.addRow(new String[] {  txtName.getText(), txtDescription.getText(),
 									txtCount.getText(),
 									txtPowerType.getText() });
 

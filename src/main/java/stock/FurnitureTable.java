@@ -186,9 +186,6 @@ public class FurnitureTable {
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				int lengthOfItemList = ItemList.getFurnitures().size();
-				String strIndex = Integer.toString(lengthOfItemList + 1);
-
 				if (!txtCount.getText().matches("([0-9]*){1,20}")) {
 					JOptionPane.showMessageDialog(frame, "count value must be numeric!");
 				} else {
@@ -205,7 +202,7 @@ public class FurnitureTable {
 							ItemList.getFurnitures().add(furniture);
 
 							// update Table
-							model.addRow(new String[] { strIndex, txtName.getText(), txtDescription.getText(),
+							model.addRow(new String[] { txtName.getText(), txtDescription.getText(),
 									txtCount.getText(),
 									txtMaterial.getText() });
 
