@@ -85,7 +85,7 @@ public class FurnitureTable {
 
 		panel = new JPanel();
 
-		String col[] = { "Id", "Name", "Description", "Count", "Material" };
+		String col[] = {"Name", "Description", "Count", "Material" };
 
 		model = new DefaultTableModel(col, 0);
 		for (String[] row : ItemList.getFurnitureDataForTable()) {
