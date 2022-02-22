@@ -99,7 +99,6 @@ public class FurnitureTable {
 		jTable1.setModel(model);
 
 		header = jTable1.getTableHeader();
-		header.setBackground(Color.yellow);
 		panel.setLayout(null);
 
 		pane = new JScrollPane(jTable1);
@@ -113,7 +112,7 @@ public class FurnitureTable {
 		frame.setUndecorated(true);
                 frame.setAlwaysOnTop(true);
 		frame.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
                 
 
