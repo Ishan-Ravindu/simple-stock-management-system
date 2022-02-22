@@ -15,7 +15,7 @@ public class ElectronicTable {
 	private JTableHeader header;
 
 	private JButton btnAdd;
-	private JButton btnDelete;
+	// private JButton btnDelete;
 	private JButton btnUpdate;
 
 	private JTextField txtName;
@@ -24,9 +24,6 @@ public class ElectronicTable {
 	private JTextField txtPowerType;
 
 	private DefaultTableModel model;
-	private JTextField txtMath;
-	private JTextField txtMarks;
-	private JTextField txtGrade;
 
 	private JPanel panel;
 
@@ -72,10 +69,10 @@ public class ElectronicTable {
 		btnAdd.setBounds(327, 33, 130, 31);
 		frame.getContentPane().add(btnAdd);
 
-		btnDelete = new JButton("Delete selected");
-		btnDelete.setBackground(Color.ORANGE);
-		btnDelete.setBounds(327, 74, 130, 31);
-		frame.getContentPane().add(btnDelete);
+		// btnDelete = new JButton("Delete selected");
+		// btnDelete.setBackground(Color.ORANGE);
+		// btnDelete.setBounds(327, 74, 130, 31);
+		// frame.getContentPane().add(btnDelete);
 
 		btnUpdate = new JButton("Update");
 		btnUpdate.setBounds(327, 115, 130, 31);
@@ -223,38 +220,27 @@ public class ElectronicTable {
 		});
 
 		// delete data
-		btnDelete.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+	// 	btnDelete.addActionListener(new ActionListener() {
+	// 		public void actionPerformed(ActionEvent arg0) {
 
-				int selectedRow = jTable1.getSelectedRow();
+	// 			int selectedRow = jTable1.getSelectedRow();
 
-				int answer = JOptionPane.showConfirmDialog(frame, "Are you sure you want to delete this instance?",
-						"An Inane Question", JOptionPane.YES_NO_OPTION);
+	// 			int answer = JOptionPane.showConfirmDialog(frame, "Are you sure you want to delete this instance?",
+	// 					"An Inane Question", JOptionPane.YES_NO_OPTION);
 
-				if (selectedRow >= 0 && answer == 0) {
-					model.removeRow(selectedRow);
-					txtName.setText("");
-					txtName.setText("");
-					txtCount.setText("");
-					txtPowerType.setText("");
-					txtMath.setText("");
-					txtMarks.setText("");
-					txtGrade.setText("");
-				}
-			}
-		});
+	// 			if (selectedRow >= 0 && answer == 0) {
+	// 				model.removeRow(selectedRow);
+	// 				txtName.setText("");
+	// 				txtName.setText("");
+	// 				txtCount.setText("");
+	// 				txtPowerType.setText("");
+	// 				txtMath.setText("");
+	// 				txtMarks.setText("");
+	// 				txtGrade.setText("");
+	// 			}
+	// 		}
+	// 	});
+
+
 	}
-
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					FurnitureTable window = new FurnitureTable();
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 }
