@@ -15,8 +15,8 @@ public class ElectronicTable {
 	private JTableHeader header;
 
 	private JButton btnAdd;
-        private JButton btnBack;
-	// private JButton btnDelete;
+	private JButton btnBack;
+	private JButton btnDelete;
 	private JButton btnUpdate;
 
 	private JTextField txtName;
@@ -27,8 +27,6 @@ public class ElectronicTable {
 	private DefaultTableModel model;
 
 	private JPanel panel;
-
-	private int selectedRowId;
 
 	public ElectronicTable() {
 		frame = new JFrame("Electronic Items");
@@ -70,24 +68,23 @@ public class ElectronicTable {
 		btnAdd.setBounds(327, 33, 130, 31);
 		frame.getContentPane().add(btnAdd);
 
-		// btnDelete = new JButton("Delete selected");
-		// btnDelete.setBackground(Color.ORANGE);
-		// btnDelete.setBounds(327, 74, 130, 31);
-		// frame.getContentPane().add(btnDelete);
+		btnDelete = new JButton("Delete selected");
+		btnDelete.setBackground(Color.ORANGE);
+		btnDelete.setBounds(327, 74, 130, 31);
+		frame.getContentPane().add(btnDelete);
 
 		btnUpdate = new JButton("Update");
 		btnUpdate.setBounds(327, 115, 130, 31);
 		frame.getContentPane().add(btnUpdate);
-                
-                btnBack = new JButton("Back");
-//		btnBack.setBackground(Color.GRAY);
-                btnBack.setFont(new Font("Arial", Font.BOLD, 11)); // size 
-		btnBack.setBounds(420,1, 70, 20);
+
+		btnBack = new JButton("Back");
+		btnBack.setFont(new Font("Arial", Font.BOLD, 11)); // size
+		btnBack.setBounds(420, 1, 70, 20);
 		frame.getContentPane().add(btnBack);
 
 		panel = new JPanel();
 
-		String col[] = { "Id", "Name", "Description", "Count", "Power Type" };
+		String col[] = { "Name", "Description", "Count", "Power Type" };
 
 		model = new DefaultTableModel(col, 0);
 		for (String[] row : ItemList.getElectronicDataForTable()) {
@@ -110,7 +107,7 @@ public class ElectronicTable {
 
 		frame.setSize(500, 750);
 		frame.setUndecorated(true);
-                frame.setAlwaysOnTop(true);
+		frame.setAlwaysOnTop(true);
 		frame.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
@@ -120,76 +117,70 @@ public class ElectronicTable {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
 				int update_row = jTable1.rowAtPoint(evt.getPoint());
-				try {
-					selectedRowId = Integer.parseInt((String) model.getValueAt(update_row, 0));
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(frame, "something went wrong!");
-				}
-				txtName.setText(model.getValueAt(update_row, 1).toString());
-				txtDescription.setText(model.getValueAt(update_row, 2).toString());
-				txtCount.setText(model.getValueAt(update_row, 3).toString());
-				txtPowerType.setText(model.getValueAt(update_row, 4).toString());
+				txtName.setText(model.getValueAt(update_row, 0).toString());
+				txtDescription.setText(model.getValueAt(update_row, 1).toString());
+				txtCount.setText(model.getValueAt(update_row, 2).toString());
+				txtPowerType.setText(model.getValueAt(update_row, 3).toString());
 			}
 		});
 
 		// update table data
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                            
-                            
-                            if (txtName.getText().equals("") &&
+
+				if (txtName.getText().equals("") &&
 						txtDescription.getText().equals("") &&
 						txtCount.getText().equals("") &&
-						txtPowerType.getText().equals("")){
-                            
-                                JOptionPane.showMessageDialog(frame, "Click Table raw to Upadte!");
-                            
-                            }else{
-                            
-                            
-				int update_row = jTable1.getSelectedRow();
-				if (!txtName.getText().equals("") &&
-						!txtDescription.getText().equals("") &&
-						!txtCount.getText().equals("") &&
-						!txtPowerType.getText().equals("")) {
-					if (update_row != -1) {
-						try {
-							//update itemList state
-							int quantity = Integer.parseInt(txtCount.getText());
-							ItemList.getElectronics().get(selectedRowId-1).setCount(quantity);
-							ItemList.getElectronics().get(selectedRowId-1).setName(txtName.getText());
-							ItemList.getElectronics().get(selectedRowId-1).setDescription(txtDescription.getText());
-							ItemList.getElectronics().get(selectedRowId-1).setPowerType(txtPowerType.getText());
-						
-							//update table
-							model.setValueAt(txtName.getText(), update_row, 1);
-							model.setValueAt(txtDescription.getText(), update_row, 2);
-							if (!txtCount.getText().matches("([0-9]*){1,20}")) {
-								JOptionPane.showMessageDialog(frame, "count value must be numeric!");
-							} else {
-								model.setValueAt(txtCount.getText(), update_row, 3);
-							}
-							model.setValueAt(txtPowerType.getText(), update_row, 4);
-							JOptionPane.showMessageDialog(frame, "Successfully added!");
+						txtPowerType.getText().equals("")) {
 
-							// clear txtFields
-							txtName.setText("");
-							txtDescription.setText("");
-							txtCount.setText("");
-							txtPowerType.setText("");
-							update_row = -1;
+					JOptionPane.showMessageDialog(frame, "Click Table raw to Update!");
 
-						} catch (Exception er) {
-							JOptionPane.showMessageDialog(frame, er.getMessage());
-						}
-
-					}
 				} else {
-					JOptionPane.showMessageDialog(frame, "All texts must be filled!");
-				}
 
+					int update_row = jTable1.getSelectedRow();
+					if (!txtName.getText().equals("") &&
+							!txtDescription.getText().equals("") &&
+							!txtCount.getText().equals("") &&
+							!txtPowerType.getText().equals("")) {
+						if (update_row != -1) {
+							try {
+								// update itemList state
+								int quantity = Integer.parseInt(txtCount.getText());
+								ItemList.getElectronics().get(update_row).setCount(quantity);
+								ItemList.getElectronics().get(update_row).setName(txtName.getText());
+								ItemList.getElectronics().get(update_row)
+										.setDescription(txtDescription.getText());
+								ItemList.getElectronics().get(update_row).setPowerType(txtPowerType.getText());
+
+								// update table
+								model.setValueAt(txtName.getText(), update_row, 0);
+								model.setValueAt(txtDescription.getText(), update_row, 1);
+								if (!txtCount.getText().matches("([0-9]*){1,20}")) {
+									JOptionPane.showMessageDialog(frame, "count value must be numeric!");
+								} else {
+									model.setValueAt(txtCount.getText(), update_row, 2);
+								}
+								model.setValueAt(txtPowerType.getText(), update_row, 3);
+								JOptionPane.showMessageDialog(frame, "Successfully added!");
+
+								// clear txtFields
+								txtName.setText("");
+								txtDescription.setText("");
+								txtCount.setText("");
+								txtPowerType.setText("");
+								update_row = -1;
+
+							} catch (Exception er) {
+								JOptionPane.showMessageDialog(frame, er.getMessage());
+							}
+
+						}
+					} else {
+						JOptionPane.showMessageDialog(frame, "All texts must be filled!");
+					}
+
+				}
 			}
-                        }
 		});
 
 		// add table data
@@ -210,7 +201,8 @@ public class ElectronicTable {
 						try {
 							// update ItemList state
 							int quantity = Integer.parseInt(txtCount.getText());
-							Electronic electronic = new Electronic(quantity, txtName.getText(), txtDescription.getText(),
+							Electronic electronic = new Electronic(quantity, txtName.getText(),
+									txtDescription.getText(),
 									txtPowerType.getText());
 							ItemList.getElectronics().add(electronic);
 
@@ -237,40 +229,43 @@ public class ElectronicTable {
 				}
 			}
 		});
-                
-                
 
 		// delete data
-	// 	btnDelete.addActionListener(new ActionListener() {
-	// 		public void actionPerformed(ActionEvent arg0) {
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (txtName.getText().equals("") &&
+						txtDescription.getText().equals("") &&
+						txtCount.getText().equals("") &&
+						txtPowerType.getText().equals("")) {
 
-	// 			int selectedRow = jTable1.getSelectedRow();
+					JOptionPane.showMessageDialog(frame, "Click Table raw to Delete!");
 
-	// 			int answer = JOptionPane.showConfirmDialog(frame, "Are you sure you want to delete this instance?",
-	// 					"An Inane Question", JOptionPane.YES_NO_OPTION);
+				} else {
+					int selectedRow = jTable1.getSelectedRow();
+					int answer = JOptionPane.showConfirmDialog(frame, "Are you sure you want to delete this instance?",
+							"An Inane Question", JOptionPane.YES_NO_OPTION);
 
-	// 			if (selectedRow >= 0 && answer == 0) {
-	// 				model.removeRow(selectedRow);
-	// 				txtName.setText("");
-	// 				txtName.setText("");
-	// 				txtCount.setText("");
-	// 				txtPowerType.setText("");
-	// 				txtMath.setText("");
-	// 				txtMarks.setText("");
-	// 				txtGrade.setText("");
-	// 			}
-	// 		}
-	// 	});
-        
-        btnBack.addActionListener(new ActionListener() {
+					if (selectedRow >= 0 && answer == 0) {
+						model.removeRow(selectedRow);
+						ItemList.getElectronics().remove(selectedRow);
+						txtName.setText("");
+						txtName.setText("");
+						txtCount.setText("");
+						txtPowerType.setText("");
+					}
+				}
+
+			}
+		});
+
+		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                        frame.dispose();
-                        new StockFrame().setVisible(true);
-                        
-                        }
-        
-        });
+				frame.dispose();
+				new StockFrame().setVisible(true);
 
+			}
+
+		});
 
 	}
 }

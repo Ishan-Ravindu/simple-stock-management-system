@@ -15,8 +15,8 @@ public class FurnitureTable {
 	private JTableHeader header;
 
 	private JButton btnAdd;
-        private JButton btnBack;
-	// private JButton btnDelete;
+	private JButton btnBack;
+	private JButton btnDelete;
 	private JButton btnUpdate;
 
 	private JTextField txtName;
@@ -27,8 +27,6 @@ public class FurnitureTable {
 	private DefaultTableModel model;
 
 	private JPanel panel;
-
-	private int selectedRowId;
 
 	public FurnitureTable() {
 		frame = new JFrame("Furniture Items");
@@ -70,19 +68,19 @@ public class FurnitureTable {
 		btnAdd.setBounds(327, 33, 130, 31);
 		frame.getContentPane().add(btnAdd);
 
-		// btnDelete = new JButton("Delete selected");
-		// btnDelete.setBackground(Color.ORANGE);
-		// btnDelete.setBounds(327, 74, 130, 31);
-		// frame.getContentPane().add(btnDelete);
+		btnDelete = new JButton("Delete selected");
+		btnDelete.setBackground(Color.ORANGE);
+		btnDelete.setBounds(327, 74, 130, 31);
+		frame.getContentPane().add(btnDelete);
 
 		btnUpdate = new JButton("Update");
 		btnUpdate.setBounds(327, 115, 130, 31);
 		frame.getContentPane().add(btnUpdate);
-                
-                btnBack = new JButton("Back");
-//		btnBack.setBackground(Color.GRAY);
-                btnBack.setFont(new Font("Arial", Font.BOLD, 11)); // size 
-		btnBack.setBounds(420,1, 70, 20);
+
+		btnBack = new JButton("Back");
+		// btnBack.setBackground(Color.GRAY);
+		btnBack.setFont(new Font("Arial", Font.BOLD, 11)); // size
+		btnBack.setBounds(420, 1, 70, 20);
 		frame.getContentPane().add(btnBack);
 
 		panel = new JPanel();
@@ -110,85 +108,80 @@ public class FurnitureTable {
 
 		frame.setSize(500, 750);
 		frame.setUndecorated(true);
-                frame.setAlwaysOnTop(true);
+		frame.setAlwaysOnTop(true);
 		frame.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-                
 
 		// table row click
 		jTable1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
 				int update_row = jTable1.rowAtPoint(evt.getPoint());
-				try {
-					selectedRowId = Integer.parseInt((String) model.getValueAt(update_row, 0));
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(frame, "something went wrong!");
-				}
-				txtName.setText(model.getValueAt(update_row, 1).toString());
-				txtDescription.setText(model.getValueAt(update_row, 2).toString());
-				txtCount.setText(model.getValueAt(update_row, 3).toString());
-				txtMaterial.setText(model.getValueAt(update_row, 4).toString());
+				txtName.setText(model.getValueAt(update_row, 0).toString());
+				txtDescription.setText(model.getValueAt(update_row, 1).toString());
+				txtCount.setText(model.getValueAt(update_row, 2).toString());
+				txtMaterial.setText(model.getValueAt(update_row, 3).toString());
 			}
 		});
 
 		// update table data
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                            
-                            if (txtName.getText().equals("") &&
+
+				if (txtName.getText().equals("") &&
 						txtDescription.getText().equals("") &&
 						txtCount.getText().equals("") &&
-						txtMaterial.getText().equals("")){
-                            
-                                JOptionPane.showMessageDialog(frame, "Click Table raw to Upadte!");
-                            
-                            }else{
-                            
-                            
-				int update_row = jTable1.getSelectedRow();
-				if (!txtName.getText().equals("") &&
-						!txtDescription.getText().equals("") &&
-						!txtCount.getText().equals("") &&
-						!txtMaterial.getText().equals("")) {
-					if (update_row != -1) {
-						try {
-							//update itemList state
-							int quantity = Integer.parseInt(txtCount.getText());
-							ItemList.getFurnitures().get(selectedRowId-1).setCount(quantity);
-							ItemList.getFurnitures().get(selectedRowId-1).setName(txtName.getText());
-							ItemList.getFurnitures().get(selectedRowId-1).setDescription(txtDescription.getText());
-							ItemList.getFurnitures().get(selectedRowId-1).setMaterial(txtMaterial.getText());
-						
-							//update table
-							model.setValueAt(txtName.getText(), update_row, 1);
-							model.setValueAt(txtDescription.getText(), update_row, 2);
-							if (!txtCount.getText().matches("([0-9]*){1,20}")) {
-								JOptionPane.showMessageDialog(frame, "count value must be numeric!");
-							} else {
-								model.setValueAt(txtCount.getText(), update_row, 3);
-							}
-							model.setValueAt(txtMaterial.getText(), update_row, 4);
-							JOptionPane.showMessageDialog(frame, "Successfully added!");
+						txtMaterial.getText().equals("")) {
 
-							// clear txtFields
-							txtName.setText("");
-							txtDescription.setText("");
-							txtCount.setText("");
-							txtMaterial.setText("");
-							update_row = -1;
+					JOptionPane.showMessageDialog(frame, "Click Table raw to Upadte!");
 
-						} catch (Exception er) {
-							JOptionPane.showMessageDialog(frame, er.getMessage());
-						}
-
-					}
 				} else {
-					JOptionPane.showMessageDialog(frame, "All texts must be filled!");
-				}
 
-			}}
+					int update_row = jTable1.getSelectedRow();
+					if (!txtName.getText().equals("") &&
+							!txtDescription.getText().equals("") &&
+							!txtCount.getText().equals("") &&
+							!txtMaterial.getText().equals("")) {
+						if (update_row != -1) {
+							try {
+								// update itemList state
+								int quantity = Integer.parseInt(txtCount.getText());
+								ItemList.getFurnitures().get(update_row).setCount(quantity);
+								ItemList.getFurnitures().get(update_row).setName(txtName.getText());
+								ItemList.getFurnitures().get(update_row)
+										.setDescription(txtDescription.getText());
+								ItemList.getFurnitures().get(update_row).setMaterial(txtMaterial.getText());
+
+								// update table
+								model.setValueAt(txtName.getText(), update_row, 0);
+								model.setValueAt(txtDescription.getText(), update_row, 1);
+								if (!txtCount.getText().matches("([0-9]*){1,20}")) {
+									JOptionPane.showMessageDialog(frame, "count value must be numeric!");
+								} else {
+									model.setValueAt(txtCount.getText(), update_row, 2);
+								}
+								model.setValueAt(txtMaterial.getText(), update_row, 3);
+								JOptionPane.showMessageDialog(frame, "Successfully added!");
+
+								// clear txtFields
+								txtName.setText("");
+								txtDescription.setText("");
+								txtCount.setText("");
+								txtMaterial.setText("");
+								update_row = -1;
+
+							} catch (Exception er) {
+								JOptionPane.showMessageDialog(frame, er.getMessage());
+							}
+
+						}
+					} else {
+						JOptionPane.showMessageDialog(frame, "All texts must be filled!");
+					}
+
+				}
+			}
 		});
 
 		// add table data
@@ -238,36 +231,47 @@ public class FurnitureTable {
 		});
 
 		// delete data
-		// btnDelete.addActionListener(new ActionListener() {
-		// 	public void actionPerformed(ActionEvent arg0) {
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
 
-		// 		int selectedRow = jTable1.getSelectedRow();
+				
 
-		// 		int answer = JOptionPane.showConfirmDialog(frame, "Are you sure you want to delete this instance?",
-		// 				"An Inane Question", JOptionPane.YES_NO_OPTION);
+				if (txtName.getText().equals("") &&
+						txtDescription.getText().equals("") &&
+						txtCount.getText().equals("") &&
+						txtMaterial.getText().equals("")) {
 
-		// 		if (selectedRow >= 0 && answer == 0) {
-		// 			model.removeRow(selectedRow);
-		// 			txtName.setText("");
-		// 			txtName.setText("");
-		// 			txtCount.setText("");
-		// 			txtMaterial.setText("");
-		// 			txtMath.setText("");
-		// 			txtMarks.setText("");
-		// 			txtGrade.setText("");
-		// 		}
-		// 	}
-		// });
-                
-                 btnBack.addActionListener(new ActionListener() {
+					JOptionPane.showMessageDialog(frame, "Click Table raw to Delete!");
+
+				} else {
+					int selectedRow = jTable1.getSelectedRow();
+
+					int answer = JOptionPane.showConfirmDialog(frame, "Are you sure you want to delete this instance?",
+						"An Inane Question", JOptionPane.YES_NO_OPTION);
+
+				if (selectedRow >= 0 && answer == 0) {
+					model.removeRow(selectedRow);
+					ItemList.getFurnitures().remove(selectedRow);
+					txtName.setText("");
+					txtName.setText("");
+					txtCount.setText("");
+					txtMaterial.setText("");
+
+				}
+				}
+
+				
+			}
+		});
+
+		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                        frame.dispose();
-                        new StockFrame().setVisible(true);
-                        
-                        }
-        
-        });
-	}
+				frame.dispose();
+				new StockFrame().setVisible(true);
 
+			}
+
+		});
+	}
 
 }

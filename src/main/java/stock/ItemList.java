@@ -72,20 +72,16 @@ public class ItemList {
         for (int i = 0; i < ItemList.getFurnitures().size(); i++) {
             for (int j = 0; j < 5; j++) {
                 if (j == 0) {
-                    String strIndex = Integer.toString(i + 1);
-                    data[i][j] = strIndex;
-                }
-                if (j == 1) {
                     data[i][j] = ItemList.getFurnitures().get(i).getName();
                 }
-                if (j == 2) {
+                if (j == 1) {
                     data[i][j] = ItemList.getFurnitures().get(i).getDescription();
                 }
-                if (j == 3) {
+                if (j == 2) {
                     String strCount = Integer.toString(ItemList.getFurnitures().get(i).getCount());
                     data[i][j] = strCount;
                 }
-                if (j == 4) {
+                if (j == 3) {
                     data[i][j] = ItemList.getFurnitures().get(i).getMaterial();
                 }
             }
@@ -100,20 +96,16 @@ public class ItemList {
         for (int i = 0; i < ItemList.getElectronics().size(); i++) {
             for (int j = 0; j < 5; j++) {
                 if (j == 0) {
-                    String strIndex = Integer.toString(i + 1);
-                    data[i][j] = strIndex;
-                }
-                if (j == 1) {
                     data[i][j] = ItemList.getElectronics().get(i).getName();
                 }
-                if (j == 2) {
+                if (j == 1) {
                     data[i][j] = ItemList.getElectronics().get(i).getDescription();
                 }
-                if (j == 3) {
-                    String strCount = Integer.toString(ItemList.getFurnitures().get(i).getCount());
+                if (j == 2) {
+                    String strCount = Integer.toString(ItemList.getElectronics().get(i).getCount());
                     data[i][j] = strCount;
                 }
-                if (j == 4) {
+                if (j == 3) {
                     data[i][j] = ItemList.getElectronics().get(i).getPowerType();
                 }
             }
