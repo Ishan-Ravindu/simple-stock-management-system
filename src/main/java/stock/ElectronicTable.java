@@ -62,7 +62,7 @@ public class ElectronicTable {
 		txtPowerType.setColumns(10);
 		frame.getContentPane().add(txtPowerType);
 		JLabel lblPowerType = new JLabel("Power Type:");
-		lblPowerType.setBounds(56, 129, 69, 14);
+		lblPowerType.setBounds(56, 129, 89, 14);
 		frame.getContentPane().add(lblPowerType);
 
 		btnAdd = new JButton("Add");
@@ -81,8 +81,8 @@ public class ElectronicTable {
                 
                 btnBack = new JButton("Back");
 //		btnBack.setBackground(Color.GRAY);
-                btnBack.setFont(new Font("Arial", Font.BOLD, 20)); // size 
-		btnBack.setBounds(450,1, 40, 20);
+                btnBack.setFont(new Font("Arial", Font.BOLD, 11)); // size 
+		btnBack.setBounds(420,1, 70, 20);
 		frame.getContentPane().add(btnBack);
 
 		panel = new JPanel();

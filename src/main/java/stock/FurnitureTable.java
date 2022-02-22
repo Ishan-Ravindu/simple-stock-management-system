@@ -81,8 +81,8 @@ public class FurnitureTable {
                 
                 btnBack = new JButton("Back");
 //		btnBack.setBackground(Color.GRAY);
-                btnBack.setFont(new Font("Arial", Font.BOLD, 20)); // size 
-		btnBack.setBounds(450,1, 40, 20);
+                btnBack.setFont(new Font("Arial", Font.BOLD, 11)); // size 
+		btnBack.setBounds(420,1, 70, 20);
 		frame.getContentPane().add(btnBack);
 
 		panel = new JPanel();
