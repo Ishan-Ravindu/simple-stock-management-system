@@ -137,6 +137,17 @@ public class FurnitureTable {
 		// update table data
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+                            
+                            if (txtName.getText().equals("") &&
+						txtDescription.getText().equals("") &&
+						txtCount.getText().equals("") &&
+						txtMaterial.getText().equals("")){
+                            
+                                JOptionPane.showMessageDialog(frame, "Click Table raw to Upadte!");
+                            
+                            }else{
+                            
+                            
 				int update_row = jTable1.getSelectedRow();
 				if (!txtName.getText().equals("") &&
 						!txtDescription.getText().equals("") &&
@@ -178,7 +189,7 @@ public class FurnitureTable {
 					JOptionPane.showMessageDialog(frame, "All texts must be filled!");
 				}
 
-			}
+			}}
 		});
 
 		// add table data

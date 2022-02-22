@@ -136,6 +136,18 @@ public class ElectronicTable {
 		// update table data
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+                            
+                            
+                            if (txtName.getText().equals("") &&
+						txtDescription.getText().equals("") &&
+						txtCount.getText().equals("") &&
+						txtPowerType.getText().equals("")){
+                            
+                                JOptionPane.showMessageDialog(frame, "Click Table raw to Upadte!");
+                            
+                            }else{
+                            
+                            
 				int update_row = jTable1.getSelectedRow();
 				if (!txtName.getText().equals("") &&
 						!txtDescription.getText().equals("") &&
@@ -178,6 +190,7 @@ public class ElectronicTable {
 				}
 
 			}
+                        }
 		});
 
 		// add table data
