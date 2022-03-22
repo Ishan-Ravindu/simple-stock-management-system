@@ -1,5 +1,13 @@
 package auth;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import javax.swing.JOptionPane;
+
+import config.MysqlConnect;
+
 public class Login {
     private String email;
     private String password;
@@ -10,13 +18,24 @@ public class Login {
     }
 
     public boolean signIn() {
-        UserList userList = new UserList();
-        for (User i : userList.getUsers()) {
-            if (this.email.equalsIgnoreCase(i.getEmail()) && this.password.equalsIgnoreCase(i.getPassword())) {
+        try {
+            Connection conn = MysqlConnect.ConnectDB();
+            PreparedStatement st = (PreparedStatement)conn.prepareStatement("Select * from user where email=? and password=?");
+            st.setString(1, this.email);
+            st.setString(2, this.password);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                conn.close();
                 return true;
+            } else {
+                conn.close();
+                return false;
             }
+        } catch (Exception e) {
+            System.out.println("db fail");
+            JOptionPane.showMessageDialog(null, e);
+            return false;
         }
-        return false;
     }
 
 }

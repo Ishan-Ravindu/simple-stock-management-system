@@ -12,11 +12,10 @@ USE simple_stock_management_system;
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `user_id` int AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`user_id`)
+  PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO user(name,email,password) VALUES('group11','group11@gmail.com','123@group11');
