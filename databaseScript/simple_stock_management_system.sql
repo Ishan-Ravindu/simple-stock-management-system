@@ -19,6 +19,9 @@ CREATE TABLE `user` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+INSERT INTO user(name,email,password) VALUES('group11','group11@gmail.com','123@group11');
+INSERT INTO user(name,email,password) VALUES('group','group@gmail.com','123@group');
+
 --
 -- Table structure for table `class`
 --
@@ -33,6 +36,10 @@ CREATE TABLE `electronic` (
   PRIMARY KEY (`electronic_id`)  
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+INSERT INTO electronic(name,description,power_type,count) VALUES('table fan 1','fan description 1','AC',12);
+INSERT INTO electronic(name,description,power_type,count) VALUES('table fan 2','fan description 2','AC',15);
+INSERT INTO electronic(name,description,power_type,count) VALUES('table fan 3','fan description 3','DC',100);
+
 --
 -- Table structure for table `furniture`
 --
@@ -46,3 +53,7 @@ CREATE TABLE `furniture` (
   `material` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`furniture_id`)  
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO furniture(name,description,count,material) VALUES('teacher chair 1','description 1',10,'wood');
+INSERT INTO furniture(name,description,count,material) VALUES('teacher chair 2','description 2',15,'wood');
+INSERT INTO furniture(name,description,count,material) VALUES('teacher chair 3','description 3',20,'wood');
