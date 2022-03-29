@@ -2,6 +2,8 @@ package stock;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.*;
 
@@ -86,8 +88,22 @@ public class FurnitureTable {
 		String col[] = { "Name", "Description", "Count", "Material" };
 
 		model = new DefaultTableModel(col, 0);
-		for (String[] row : ItemList.getFurnitureDataForTable()) {
-			model.addRow(row);
+		ResultSet rs = FetchData.getFurnitureDataForTable();
+		try {
+			while (rs.next()) {
+				String name = rs.getString("name");
+				String description = rs.getString("description");
+				String count = rs.getString("count");
+				String material = rs.getString("material");
+			
+				// create a single array of one row's worth of data
+				String[] data = { name, description, count, material} ;
+			
+				// and add this row of data into the table model
+				model.addRow(data);
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
 		}
 
 		jTable1 = new JTable();

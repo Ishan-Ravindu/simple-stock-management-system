@@ -2,6 +2,8 @@ package stock;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.*;
 
@@ -85,8 +87,22 @@ public class ElectronicTable {
 		String col[] = { "Name", "Description", "Count", "Power Type" };
 
 		model = new DefaultTableModel(col, 0);
-		for (String[] row : ItemList.getElectronicDataForTable()) {
-			model.addRow(row);
+		ResultSet rs = FetchData.getElectronicDataForTable();
+		try {
+			while (rs.next()) {
+				String name = rs.getString("name");
+				String description = rs.getString("description");
+				String count = rs.getString("count");
+				String powerType = rs.getString("power_type");
+			
+				// create a single array of one row's worth of data
+				String[] data = { name, description, count, powerType} ;
+			
+				// and add this row of data into the table model
+				model.addRow(data);
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
 		}
 
 		jTable1 = new JTable();
