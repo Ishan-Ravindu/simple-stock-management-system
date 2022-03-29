@@ -175,7 +175,7 @@ public class ElectronicTable {
 								model.setValueAt(txtDescription.getText(), update_row, 2);
 								model.setValueAt(txtCount.getText(), update_row, 3);
 								model.setValueAt(txtPowerType.getText(), update_row, 4);
-								JOptionPane.showMessageDialog(frame, "Successfully added!");
+								JOptionPane.showMessageDialog(frame, "Successfully updated!");
 
 								// clear txtFields
 								txtName.setText("");
