@@ -10,6 +10,7 @@ import javax.swing.*;
 import javax.swing.table.*;
 
 import stock.db.AddData;
+import stock.db.DeleteData;
 import stock.db.FetchData;
 
 public class FurnitureTable {
@@ -30,6 +31,8 @@ public class FurnitureTable {
 	private DefaultTableModel model;
 
 	private JPanel panel;
+
+	private int selectedRowId;
 
 	public FurnitureTable() {
 		frame = new JFrame("Furniture Items");
@@ -88,20 +91,21 @@ public class FurnitureTable {
 
 		panel = new JPanel();
 
-		String col[] = { "Name", "Description", "Count", "Material" };
+		String col[] = { "#ID", "Name", "Description", "Count", "Material" };
 
 		model = new DefaultTableModel(col, 0);
 		ResultSet rs = FetchData.getFurnitureDataForTable();
 		try {
 			while (rs.next()) {
+				String id = rs.getString("furniture_id");
 				String name = rs.getString("name");
 				String description = rs.getString("description");
 				String count = rs.getString("count");
 				String material = rs.getString("material");
-			
+
 				// create a single array of one row's worth of data
-				String[] data = { name, description, count, material} ;
-			
+				String[] data = { id, name, description, count, material };
+
 				// and add this row of data into the table model
 				model.addRow(data);
 			}
@@ -135,10 +139,11 @@ public class FurnitureTable {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
 				int update_row = jTable1.rowAtPoint(evt.getPoint());
-				txtName.setText(model.getValueAt(update_row, 0).toString());
-				txtDescription.setText(model.getValueAt(update_row, 1).toString());
-				txtCount.setText(model.getValueAt(update_row, 2).toString());
-				txtMaterial.setText(model.getValueAt(update_row, 3).toString());
+				selectedRowId = Integer.parseInt(model.getValueAt(update_row, 0).toString());
+				txtName.setText(model.getValueAt(update_row, 1).toString());
+				txtDescription.setText(model.getValueAt(update_row, 2).toString());
+				txtCount.setText(model.getValueAt(update_row, 3).toString());
+				txtMaterial.setText(model.getValueAt(update_row, 4).toString());
 			}
 		});
 
@@ -213,21 +218,21 @@ public class FurnitureTable {
 							!txtCount.getText().equals("") &&
 							!txtMaterial.getText().equals("")) {
 
-								AddData addData = new AddData();
-								addData.addFurniture(txtName.getText(), txtDescription.getText(), txtCount.getText(),
-										txtMaterial.getText());
-		
-								//update table
-								model.addRow(new String[] { txtName.getText(), txtDescription.getText(),
-										txtCount.getText(),
-										txtMaterial.getText() });
-								//clear input
-								txtName.setText("");
-								txtDescription.setText("");
-								txtCount.setText("");
-								txtMaterial.setText("");
-		
-								JOptionPane.showMessageDialog(frame, "Data added successfully!");
+						AddData addData = new AddData();
+						addData.addFurniture(txtName.getText(), txtDescription.getText(), txtCount.getText(),
+								txtMaterial.getText());
+
+						// update table
+						model.addRow(new String[] { txtName.getText(), txtDescription.getText(),
+								txtCount.getText(),
+								txtMaterial.getText() });
+						// clear input
+						txtName.setText("");
+						txtDescription.setText("");
+						txtCount.setText("");
+						txtMaterial.setText("");
+
+						JOptionPane.showMessageDialog(frame, "Data added successfully!");
 
 					} else {
 						JOptionPane.showMessageDialog(frame, "All texts must be filled!");
@@ -254,8 +259,11 @@ public class FurnitureTable {
 							"An Inane Question", JOptionPane.YES_NO_OPTION);
 
 					if (selectedRow >= 0 && answer == 0) {
+						// delete from database
+						DeleteData deleteData = new DeleteData();
+						deleteData.deleteFurniture(selectedRowId);
+						// remove row from table
 						model.removeRow(selectedRow);
-						ItemList.getFurnitures().remove(selectedRow);
 						txtName.setText("");
 						txtDescription.setText("");
 						txtCount.setText("");

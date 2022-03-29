@@ -10,6 +10,7 @@ import javax.swing.*;
 import javax.swing.table.*;
 
 import stock.db.AddData;
+import stock.db.DeleteData;
 import stock.db.FetchData;
 
 public class ElectronicTable {
@@ -30,6 +31,9 @@ public class ElectronicTable {
 	private DefaultTableModel model;
 
 	private JPanel panel;
+
+	private int selectedRowId;
+
 
 	public ElectronicTable() {
 		frame = new JFrame("Electronic Items");
@@ -87,19 +91,20 @@ public class ElectronicTable {
 
 		panel = new JPanel();
 
-		String col[] = { "Name", "Description", "Count", "Power Type" };
+		String col[] = { "#ID","Name", "Description", "Count", "Power Type" };
 
 		model = new DefaultTableModel(col, 0);
 		ResultSet rs = FetchData.getElectronicDataForTable();
 		try {
 			while (rs.next()) {
+				String id = rs.getString("electronic_id");
 				String name = rs.getString("name");
 				String description = rs.getString("description");
 				String count = rs.getString("count");
 				String powerType = rs.getString("power_type");
 
 				// create a single array of one row's worth of data
-				String[] data = { name, description, count, powerType };
+				String[] data = { id,name, description, count, powerType };
 
 				// and add this row of data into the table model
 				model.addRow(data);
@@ -134,10 +139,11 @@ public class ElectronicTable {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
 				int update_row = jTable1.rowAtPoint(evt.getPoint());
-				txtName.setText(model.getValueAt(update_row, 0).toString());
-				txtDescription.setText(model.getValueAt(update_row, 1).toString());
-				txtCount.setText(model.getValueAt(update_row, 2).toString());
-				txtPowerType.setText(model.getValueAt(update_row, 3).toString());
+				selectedRowId =Integer.parseInt(model.getValueAt(update_row, 0).toString());
+				txtName.setText(model.getValueAt(update_row, 1).toString());
+				txtDescription.setText(model.getValueAt(update_row, 2).toString());
+				txtCount.setText(model.getValueAt(update_row, 3).toString());
+				txtPowerType.setText(model.getValueAt(update_row, 4).toString());
 			}
 		});
 
@@ -250,8 +256,11 @@ public class ElectronicTable {
 							"An Inane Question", JOptionPane.YES_NO_OPTION);
 
 					if (selectedRow >= 0 && answer == 0) {
+						//delete from database
+						DeleteData deleteData = new DeleteData();
+						deleteData.deleteElectronic(selectedRowId);
+						//remove row from table
 						model.removeRow(selectedRow);
-						ItemList.getElectronics().remove(selectedRow);
 						txtName.setText("");
 						txtDescription.setText("");
 						txtCount.setText("");
