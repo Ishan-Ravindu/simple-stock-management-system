@@ -167,9 +167,14 @@ public class FurnitureTable {
 							!txtCount.getText().equals("") &&
 							!txtMaterial.getText().equals("")) {
 						if (update_row != -1) {
-								//update database
+							if (!txtCount.getText().matches("([0-9]*){1,20}")) {
+								JOptionPane.showMessageDialog(frame, "count value must be numeric!");
+
+							} else {
+								// update database
 								UpdateData updateData = new UpdateData();
-								updateData.updateFurniture(selectedRowId, txtName.getText(), txtDescription.getText(), txtCount.getText(), txtMaterial.getText());
+								updateData.updateFurniture(selectedRowId, txtName.getText(), txtDescription.getText(),
+										txtCount.getText(), txtMaterial.getText());
 								// update table
 								model.setValueAt(txtName.getText(), update_row, 1);
 								model.setValueAt(txtDescription.getText(), update_row, 2);
@@ -183,7 +188,7 @@ public class FurnitureTable {
 								txtCount.setText("");
 								txtMaterial.setText("");
 								update_row = -1;
-
+							}
 						}
 					} else {
 						JOptionPane.showMessageDialog(frame, "All texts must be filled!");

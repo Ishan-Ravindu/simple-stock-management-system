@@ -35,7 +35,6 @@ public class ElectronicTable {
 
 	private int selectedRowId;
 
-
 	public ElectronicTable() {
 		frame = new JFrame("Electronic Items");
 
@@ -92,7 +91,7 @@ public class ElectronicTable {
 
 		panel = new JPanel();
 
-		String col[] = { "#ID","Name", "Description", "Count", "Power Type" };
+		String col[] = { "#ID", "Name", "Description", "Count", "Power Type" };
 
 		model = new DefaultTableModel(col, 0);
 		ResultSet rs = FetchData.getElectronicDataForTable();
@@ -105,7 +104,7 @@ public class ElectronicTable {
 				String powerType = rs.getString("power_type");
 
 				// create a single array of one row's worth of data
-				String[] data = { id,name, description, count, powerType };
+				String[] data = { id, name, description, count, powerType };
 
 				// and add this row of data into the table model
 				model.addRow(data);
@@ -140,7 +139,7 @@ public class ElectronicTable {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
 				int update_row = jTable1.rowAtPoint(evt.getPoint());
-				selectedRowId =Integer.parseInt(model.getValueAt(update_row, 0).toString());
+				selectedRowId = Integer.parseInt(model.getValueAt(update_row, 0).toString());
 				txtName.setText(model.getValueAt(update_row, 1).toString());
 				txtDescription.setText(model.getValueAt(update_row, 2).toString());
 				txtCount.setText(model.getValueAt(update_row, 3).toString());
@@ -167,10 +166,15 @@ public class ElectronicTable {
 							!txtCount.getText().equals("") &&
 							!txtPowerType.getText().equals("")) {
 						if (update_row != -1) {
-								//update database
+							if (!txtCount.getText().matches("([0-9]*){1,20}")) {
+								JOptionPane.showMessageDialog(frame, "count value must be numeric!");
+
+							} else {
+								// update database
 								UpdateData updateData = new UpdateData();
-								updateData.updateElectronic(selectedRowId, txtName.getText(), txtDescription.getText(), txtCount.getText(), txtPowerType.getText());
-  								// update table
+								updateData.updateElectronic(selectedRowId, txtName.getText(), txtDescription.getText(),
+										txtCount.getText(), txtPowerType.getText());
+								// update table
 								model.setValueAt(txtName.getText(), update_row, 1);
 								model.setValueAt(txtDescription.getText(), update_row, 2);
 								model.setValueAt(txtCount.getText(), update_row, 3);
@@ -183,6 +187,7 @@ public class ElectronicTable {
 								txtCount.setText("");
 								txtPowerType.setText("");
 								update_row = -1;
+							}
 
 						}
 					} else {
@@ -209,11 +214,11 @@ public class ElectronicTable {
 						addData.addElectronic(txtName.getText(), txtDescription.getText(), txtCount.getText(),
 								txtPowerType.getText());
 
-						//update table
+						// update table
 						model.addRow(new String[] { txtName.getText(), txtDescription.getText(),
 								txtCount.getText(),
 								txtPowerType.getText() });
-						//clear input
+						// clear input
 						txtName.setText("");
 						txtDescription.setText("");
 						txtCount.setText("");
@@ -243,10 +248,10 @@ public class ElectronicTable {
 							"An Inane Question", JOptionPane.YES_NO_OPTION);
 
 					if (selectedRow >= 0 && answer == 0) {
-						//delete from database
+						// delete from database
 						DeleteData deleteData = new DeleteData();
 						deleteData.deleteElectronic(selectedRowId);
-						//remove row from table
+						// remove row from table
 						model.removeRow(selectedRow);
 						txtName.setText("");
 						txtDescription.setText("");
