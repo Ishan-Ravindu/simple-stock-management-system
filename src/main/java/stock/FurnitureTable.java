@@ -211,11 +211,11 @@ public class FurnitureTable {
 							!txtMaterial.getText().equals("")) {
 
 						AddData addData = new AddData();
-						addData.addFurniture(txtName.getText(), txtDescription.getText(), txtCount.getText(),
+						int id = addData.addFurniture(txtName.getText(), txtDescription.getText(), txtCount.getText(),
 								txtMaterial.getText());
 
 						// update table
-						model.addRow(new String[] { txtName.getText(), txtDescription.getText(),
+						model.addRow(new String[] {Integer.toString(id),txtName.getText(), txtDescription.getText(),
 								txtCount.getText(),
 								txtMaterial.getText() });
 						// clear input

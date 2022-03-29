@@ -211,11 +211,11 @@ public class ElectronicTable {
 							!txtPowerType.getText().equals("")) {
 
 						AddData addData = new AddData();
-						addData.addElectronic(txtName.getText(), txtDescription.getText(), txtCount.getText(),
+						int id = addData.addElectronic(txtName.getText(), txtDescription.getText(), txtCount.getText(),
 								txtPowerType.getText());
 
 						// update table
-						model.addRow(new String[] { txtName.getText(), txtDescription.getText(),
+						model.addRow(new String[] {Integer.toString(id),txtName.getText(), txtDescription.getText(),
 								txtCount.getText(),
 								txtPowerType.getText() });
 						// clear input
