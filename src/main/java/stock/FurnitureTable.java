@@ -12,6 +12,7 @@ import javax.swing.table.*;
 import stock.db.AddData;
 import stock.db.DeleteData;
 import stock.db.FetchData;
+import stock.db.UpdateData;
 
 public class FurnitureTable {
 
@@ -166,25 +167,15 @@ public class FurnitureTable {
 							!txtCount.getText().equals("") &&
 							!txtMaterial.getText().equals("")) {
 						if (update_row != -1) {
-							try {
-								// update itemList state
-								int quantity = Integer.parseInt(txtCount.getText());
-								ItemList.getFurnitures().get(update_row).setCount(quantity);
-								ItemList.getFurnitures().get(update_row).setName(txtName.getText());
-								ItemList.getFurnitures().get(update_row)
-										.setDescription(txtDescription.getText());
-								ItemList.getFurnitures().get(update_row).setMaterial(txtMaterial.getText());
-
+								//update database
+								UpdateData updateData = new UpdateData();
+								updateData.updateFurniture(selectedRowId, txtName.getText(), txtDescription.getText(), txtCount.getText(), txtMaterial.getText());
 								// update table
-								model.setValueAt(txtName.getText(), update_row, 0);
-								model.setValueAt(txtDescription.getText(), update_row, 1);
-								if (!txtCount.getText().matches("([0-9]*){1,20}")) {
-									JOptionPane.showMessageDialog(frame, "count value must be numeric!");
-								} else {
-									model.setValueAt(txtCount.getText(), update_row, 2);
-								}
-								model.setValueAt(txtMaterial.getText(), update_row, 3);
-								JOptionPane.showMessageDialog(frame, "Successfully added!");
+								model.setValueAt(txtName.getText(), update_row, 1);
+								model.setValueAt(txtDescription.getText(), update_row, 2);
+								model.setValueAt(txtCount.getText(), update_row, 3);
+								model.setValueAt(txtMaterial.getText(), update_row, 4);
+								JOptionPane.showMessageDialog(frame, "Successfully updated!");
 
 								// clear txtFields
 								txtName.setText("");
@@ -192,10 +183,6 @@ public class FurnitureTable {
 								txtCount.setText("");
 								txtMaterial.setText("");
 								update_row = -1;
-
-							} catch (Exception er) {
-								JOptionPane.showMessageDialog(frame, er.getMessage());
-							}
 
 						}
 					} else {
