@@ -1,4 +1,4 @@
-package stock;
+package stock.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +9,7 @@ import config.MysqlConnect;
 
 public class FetchData {
 
-    public static ResultSet getFurnitureDataForTable() {
+    public static ResultSet getFurnitureDataForTable(){
         Connection conn = MysqlConnect.ConnectDB();
         try {
             PreparedStatement st = (PreparedStatement)conn.prepareStatement("Select * from furniture");
@@ -23,7 +23,7 @@ public class FetchData {
     }
 
 
-    public static ResultSet getElectronicDataForTable() {
+    public static ResultSet getElectronicDataForTable(){
         Connection conn = MysqlConnect.ConnectDB();
         try {
             PreparedStatement st = (PreparedStatement)conn.prepareStatement("Select * from electronic");
@@ -33,5 +33,6 @@ public class FetchData {
             e.printStackTrace();
             return null;
         }
+        
     }
 }

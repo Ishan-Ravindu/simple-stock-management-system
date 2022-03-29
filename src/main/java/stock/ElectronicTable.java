@@ -10,6 +10,7 @@ import javax.swing.*;
 import javax.swing.table.*;
 
 import stock.db.AddData;
+import stock.db.FetchData;
 
 public class ElectronicTable {
 

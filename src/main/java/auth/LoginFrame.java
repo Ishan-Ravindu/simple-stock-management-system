@@ -5,6 +5,8 @@
 package auth;
 
 import javax.swing.JOptionPane;
+
+import auth.db.Login;
 import stock.StockFrame;
 
 /**

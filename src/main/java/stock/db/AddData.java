@@ -17,6 +17,7 @@ public class AddData {
             String query = ("INSERT INTO electronic(name,description,count,power_type) VALUES('" + name + "','"
                     + description + "'," + intCount + ",'" + power_type + "');");
             st.executeUpdate(query);
+            conn.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,e.getMessage(),"adding failed", 0);
         }
@@ -30,6 +31,7 @@ public class AddData {
             String query = ("INSERT INTO furniture(name,description,count,material) VALUES('" + name + "','"
                     + description + "'," + intCount + ",'" + material + "');");
             st.executeUpdate(query);
+            conn.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,e.getMessage(),"adding failed", 0);
         }

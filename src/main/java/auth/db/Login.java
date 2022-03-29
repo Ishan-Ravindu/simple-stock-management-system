@@ -1,4 +1,4 @@
-package auth;
+package auth.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
