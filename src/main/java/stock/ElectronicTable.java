@@ -9,6 +9,8 @@ import javax.swing.*;
 
 import javax.swing.table.*;
 
+import stock.db.AddData;
+
 public class ElectronicTable {
 
 	private JFrame frame;
@@ -94,10 +96,10 @@ public class ElectronicTable {
 				String description = rs.getString("description");
 				String count = rs.getString("count");
 				String powerType = rs.getString("power_type");
-			
+
 				// create a single array of one row's worth of data
-				String[] data = { name, description, count, powerType} ;
-			
+				String[] data = { name, description, count, powerType };
+
 				// and add this row of data into the table model
 				model.addRow(data);
 			}
@@ -200,7 +202,7 @@ public class ElectronicTable {
 		// add table data
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-		
+
 				if (!txtCount.getText().matches("([0-9]*){1,20}")) {
 					JOptionPane.showMessageDialog(frame, "count value must be numeric!");
 				} else {
@@ -209,31 +211,21 @@ public class ElectronicTable {
 							!txtCount.getText().equals("") &&
 							!txtPowerType.getText().equals("")) {
 
-						try {
-							// update ItemList state
-							int quantity = Integer.parseInt(txtCount.getText());
-							Electronic electronic = new Electronic(quantity, txtName.getText(),
-									txtDescription.getText(),
-									txtPowerType.getText());
-							ItemList.getElectronics().add(electronic);
+						AddData addData = new AddData();
+						addData.addElectronic(txtName.getText(), txtDescription.getText(), txtCount.getText(),
+								txtPowerType.getText());
 
-							// update Table
-							model.addRow(new String[] {  txtName.getText(), txtDescription.getText(),
-									txtCount.getText(),
-									txtPowerType.getText() });
+						//update table
+						model.addRow(new String[] { txtName.getText(), txtDescription.getText(),
+								txtCount.getText(),
+								txtPowerType.getText() });
+						//clear input
+						txtName.setText("");
+						txtDescription.setText("");
+						txtCount.setText("");
+						txtPowerType.setText("");
 
-							JOptionPane.showMessageDialog(frame, "Successfully added!");
-
-							// clear txtFields
-							txtName.setText("");
-							txtDescription.setText("");
-							txtCount.setText("");
-							txtPowerType.setText("");
-
-						} catch (Exception e) {
-							JOptionPane.showMessageDialog(frame, e.getMessage());
-						}
-
+						JOptionPane.showMessageDialog(frame, "Data added successfully!");
 					} else {
 						JOptionPane.showMessageDialog(frame, "All texts must be filled!");
 					}

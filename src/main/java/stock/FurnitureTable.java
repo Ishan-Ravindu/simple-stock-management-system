@@ -9,6 +9,8 @@ import javax.swing.*;
 
 import javax.swing.table.*;
 
+import stock.db.AddData;
+
 public class FurnitureTable {
 
 	private JFrame frame;
@@ -210,29 +212,21 @@ public class FurnitureTable {
 							!txtCount.getText().equals("") &&
 							!txtMaterial.getText().equals("")) {
 
-						try {
-							// update ItemList state
-							int quantity = Integer.parseInt(txtCount.getText());
-							Furniture furniture = new Furniture(quantity, txtName.getText(), txtDescription.getText(),
-									txtMaterial.getText());
-							ItemList.getFurnitures().add(furniture);
-
-							// update Table
-							model.addRow(new String[] { txtName.getText(), txtDescription.getText(),
-									txtCount.getText(),
-									txtMaterial.getText() });
-
-							JOptionPane.showMessageDialog(frame, "Successfully added!");
-
-							// clear txtFields
-							txtName.setText("");
-							txtDescription.setText("");
-							txtCount.setText("");
-							txtMaterial.setText("");
-
-						} catch (Exception e) {
-							JOptionPane.showMessageDialog(frame, e.getMessage());
-						}
+								AddData addData = new AddData();
+								addData.addFurniture(txtName.getText(), txtDescription.getText(), txtCount.getText(),
+										txtMaterial.getText());
+		
+								//update table
+								model.addRow(new String[] { txtName.getText(), txtDescription.getText(),
+										txtCount.getText(),
+										txtMaterial.getText() });
+								//clear input
+								txtName.setText("");
+								txtDescription.setText("");
+								txtCount.setText("");
+								txtMaterial.setText("");
+		
+								JOptionPane.showMessageDialog(frame, "Data added successfully!");
 
 					} else {
 						JOptionPane.showMessageDialog(frame, "All texts must be filled!");
